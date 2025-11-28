@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relational Citation Style</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'EB Garamond', 'Garamond', 'Georgia', serif;
+            background: linear-gradient(135deg, #9fa4c4 0%, #b8bdd8 100%);
+            color: #2c2c3e;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            flex: 1;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 4rem;
+            padding-top: 2rem;
+        }
+
+        h1 {
+            font-size: 4rem;
+            font-weight: 400;
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+            color: #2c2c3e;
+            line-height: 1.1;
+        }
+
+        .tagline {
+            font-size: 1.25rem;
+            font-style: italic;
+            color: #4a4a5e;
+            margin-bottom: 0.5rem;
+        }
+
+        .version {
+            display: inline-block;
+            border: 1px solid #2c2c3e;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+
+        .about {
+            background: rgba(255, 255, 255, 0.5);
+            padding: 2.5rem;
+            border-radius: 8px;
+            margin-bottom: 3rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .about p {
+            font-size: 1.15rem;
+            margin-bottom: 1rem;
+            max-width: 700px;
+        }
+
+        .about p:last-child {
+            margin-bottom: 0;
+        }
+
+        h2 {
+            font-size: 1.75rem;
+            font-weight: 400;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .legend {
+            background: rgba(255, 255, 255, 0.6);
+            padding: 2.5rem;
+            border-radius: 8px;
+            margin-bottom: 3rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .citation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .citation-type {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .symbol {
+            font-size: 2rem;
+            font-weight: 400;
+            min-width: 40px;
+            text-align: center;
+        }
+
+        .citation-name {
+            font-size: 1rem;
+        }
+
+        .downloads {
+            background: rgba(255, 255, 255, 0.5);
+            padding: 2.5rem;
+            border-radius: 8px;
+            margin-bottom: 3rem;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .download-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: #2c2c3e;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: 2px solid #2c2c3e;
+        }
+
+        .btn:hover {
+            background: transparent;
+            color: #2c2c3e;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #2c2c3e;
+            border: 2px solid #2c2c3e;
+        }
+
+        .btn-secondary:hover {
+            background: #2c2c3e;
+            color: white;
+        }
+
+        footer {
+            background: rgba(44, 44, 62, 0.9);
+            color: #e8e8f0;
+            padding: 2.5rem 2rem;
+            margin-top: auto;
+        }
+
+        .footer-content {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .footer-left {
+            flex: 1;
+        }
+
+        .footer-left p {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-left a {
+            color: #b8bdd8;
+            text-decoration: none;
+        }
+
+        .footer-left a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-right {
+            text-align: right;
+        }
+
+        .license {
+            font-size: 0.9rem;
+            font-style: italic;
+            color: #b8bdd8;
+        }
+
+        .ornament {
+            text-align: center;
+            font-size: 1.5rem;
+            margin: 1rem 0;
+            color: #4a4a5e;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .citation-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-right {
+                text-align: center;
+            }
+
+            .download-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Relational<br>Citation<br>Style</h1>
+            <p class="tagline">All knowledge is communally generated.<br>Here's how we can acknowledge it.</p>
+            <span class="version">V1.0</span>
+        </header>
+
+        <section class="about">
+            <p>The Relational Citation Style (RCS) recognizes that knowledge is generated and circulated through conversation, community, and networks of care—often instead of publication. RCS treats oral transmission and collaborative thinking as legitimate and valuable scholarly sources that should be properly credited and traced along its lineage.</p>
+        </section>
+
+        <section class="legend">
+            <h2>Citation Types</h2>
+            <div class="citation-grid">
+                <div class="citation-type">
+                    <span class="symbol">→←</span>
+                    <span class="citation-name">Direct Conversation</span>
+                </div>
+                <div class="citation-type">
+                    <span class="symbol">→→←</span>
+                    <span class="citation-name">Secondary Transmission</span>
+                </div>
+                <div class="citation-type">
+                    <span class="symbol">--→</span>
+                    <span class="citation-name">Unknown Source</span>
+                </div>
+                <div class="citation-type">
+                    <span class="symbol">✽</span>
+                    <span class="citation-name">Co-authored Knowledge</span>
+                </div>
+                <div class="citation-type">
+                    <span class="symbol">◆</span>
+                    <span class="citation-name">Common Knowledge</span>
+                </div>
+                <div class="citation-type">
+                    <span class="symbol">✳</span>
+                    <span class="citation-name">Published Sources</span>
+                </div>
+                <div class="citation-type">
+                    <span class="symbol">✳→</span>
+                    <span class="citation-name">Recommended Source</span>
+                </div>
+                <div class="citation-type">
+                    <span class="symbol">✳✽</span>
+                    <span class="citation-name">Published Gossip</span>
+                </div>
+                <div class="citation-type">
+                    <span class="symbol">✳✳</span>
+                    <span class="citation-name">Mediated Citation</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="downloads">
+            <h2>Get Started</h2>
+            <p>Download the RCS Garamond font with custom citation glyphs and the complete handbook.</p>
+            <div class="download-buttons">
+                <a href="#" class="btn">Download Font + Handbook</a>
+                <a href="https://github.com/yourusername/relational-citation-style" class="btn btn-secondary">View on GitHub</a>
+            </div>
+        </section>
+
+        <div class="ornament">☙ ❧</div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-left">
+                <p><strong>Dvorit Khodanovich</strong></p>
+                <p><a href="mailto:dkhodanovich@gmail.com">dkhodanovich@gmail.com</a></p>
+                <p><a href="https://dvorit.ca">dvorit.ca</a></p>
+            </div>
+            <div class="footer-right">
+                <p class="license">Licensed under Creative Commons<br>Attribution-ShareAlike 4.0 International</p>
+                <p style="font-size: 0.9rem; margin-top: 0.5rem;">© Copyleft 2025</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
